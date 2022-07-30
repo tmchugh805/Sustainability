@@ -34,7 +34,9 @@ pygame.mixer.music.play(-1)
 # set frame rate per second
 FPS = 60
 
+
 def draw(win, images):
+    """A function to draw images"""
     for img, pos in images:
         win.blit(img, pos)
 
@@ -52,23 +54,27 @@ images = [(LAB, (0,0)), (BIN1, (0, 300)), (BIN2, (100, 300)), (BIN3, (200, 300))
 while run:
     clock.tick(FPS) # keep image at FPS 60 on all devices
 
-    draw(WIN, images)
-    WIN.blit(GLOVE, (glove_x, glove_y))
+    draw(WIN, images) # draw all static images
+    WIN.blit(GLOVE, (glove_x, glove_y)) # draw image of glove
 
     pygame.display.update() # show your drawings on screen
+
+
     for event in pygame.event.get():  # loop through all events
-        if event.type == pygame.QUIT:
+        if event.type == pygame.QUIT: # if user presses clicks X
             run = False
             break
+
         key = pygame.key.get_pressed()
-        if key[pygame.K_RIGHT]:
-            glove_x += 10
-        elif key[pygame.K_LEFT]:
-            glove_x -= 10
-    glove_y += GLOVE_SPEED
-    if glove_y > HEIGHT:
-        glove_x = random.randrange(0, WIDTH)
-        glove_y = -25
-        pygame.display.update()
+        if key[pygame.K_RIGHT]: # if user presses right arrow key
+            glove_x += 10 # move object to the right
+        elif key[pygame.K_LEFT]: # if user presses left arrow key
+            glove_x -= 10 # move object to the left
+    glove_y += GLOVE_SPEED # cause object to fall
+
+
+    if glove_y > HEIGHT: # if object moves off screen
+        glove_x = random.randrange(0, WIDTH) # new object falls from different x position on screen
+        glove_y = -25 # bring new object at different position
 
 pygame.quit()

@@ -9,9 +9,10 @@ pygame.mixer.pre_init(44100, 16, 2, 4096)
 pygame.init()
 
 
+WASTE = ["gloves.jpg", "bin.jpg", "lab.jpg"]
 # load images
 LAB = pygame.image.load("images/lab.jpg")
-GLOVE = scale_image(pygame.image.load("images/gloves.jpg"), 0.1)
+GLOVE = scale_image(pygame.image.load("images/"+random.choice(WASTE)), 0.1)
 BIN1 = scale_image(pygame.image.load("images/bin.jpg"), 0.1)
 BIN2 = scale_image(pygame.image.load("images/bin.jpg"), 0.1)
 BIN3 = scale_image(pygame.image.load("images/bin.jpg"), 0.1)
@@ -76,5 +77,6 @@ while run:
     if glove_y > HEIGHT: # if object moves off screen
         glove_x = random.randrange(0, WIDTH) # new object falls from different x position on screen
         glove_y = -25 # bring new object at different position
+        GLOVE = scale_image(pygame.image.load("images/"+random.choice(WASTE)), 0.1) # select random waste
 
 pygame.quit()

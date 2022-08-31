@@ -2,22 +2,22 @@ import random
 
 import pygame
 from utils import scale_image
+from utils import draw
+from score import score
 
 
 # initialize mixer
 pygame.mixer.pre_init(44100, 16, 2, 4096)
 pygame.init()
 
-
 WASTE = ["gloves.jpg", "bin.jpg", "lab.jpg"]
 # load images
 LAB = pygame.image.load("images/lab.jpg")
-GLOVE = scale_image(pygame.image.load("images/"+random.choice(WASTE)), 0.1)
+GLOVE = scale_image(pygame.image.load("images/" + random.choice(WASTE)), 0.1)
 BIN1 = scale_image(pygame.image.load("images/bin.jpg"), 0.1)
 BIN2 = scale_image(pygame.image.load("images/bin.jpg"), 0.1)
 BIN3 = scale_image(pygame.image.load("images/bin.jpg"), 0.1)
 BIN4 = scale_image(pygame.image.load("images/bin.jpg"), 0.1)
-
 
 # set window
 WIDTH, HEIGHT = LAB.get_width(), LAB.get_height()
@@ -35,13 +35,6 @@ pygame.mixer.music.play(-1)
 # set frame rate per second
 FPS = 60
 
-
-def draw(win, images):
-    """A function to draw images"""
-    for img, pos in images:
-        win.blit(img, pos)
-
-
 ## set initial image position
 glove_x = random.randrange(0, WIDTH)
 glove_y = 0
@@ -49,34 +42,36 @@ glove_y = 0
 # code for main game
 run = True
 clock = pygame.time.Clock()
-images = [(LAB, (0,0)), (BIN1, (0, 300)), (BIN2, (100, 300)), (BIN3, (200, 300)), (BIN4, (300, 300))]
-
+images = [(LAB, (0, 0)), (BIN1, (0, 300)), (BIN2, (100, 300)), (BIN3, (200, 300)), (BIN4, (300, 300))]
+scoreboard = score(0, 500, 10)
 
 while run:
-    clock.tick(FPS) # keep image at FPS 60 on all devices
+    clock.tick(FPS)  # keep image at FPS 60 on all devices
 
-    draw(WIN, images) # draw all static images
-    WIN.blit(GLOVE, (glove_x, glove_y)) # draw image of glove
+    draw(WIN, images)  # draw all static images
+    WIN.blit(GLOVE, (glove_x, glove_y))  # draw image of glove
+    scoreboard.display(WIN)
+    pygame.display.update()  # show your drawings on screen
 
-    pygame.display.update() # show your drawings on screen
+    for event in pygame.event.get():
 
-
-    for event in pygame.event.get():  # loop through all events
-        if event.type == pygame.QUIT: # if user presses clicks X
+        # loop through all events
+        if event.type == pygame.QUIT:  # if user presses clicks X
             run = False
             break
 
         key = pygame.key.get_pressed()
-        if key[pygame.K_RIGHT]: # if user presses right arrow key
-            glove_x += 10 # move object to the right
-        elif key[pygame.K_LEFT]: # if user presses left arrow key
-            glove_x -= 10 # move object to the left
-    glove_y += GLOVE_SPEED # cause object to fall
+        if key[pygame.K_RIGHT]:  # if user presses right arrow key
+            glove_x += 10  # move object to the right
+        elif key[pygame.K_LEFT]:  # if user presses left arrow key
+            glove_x -= 10  # move object to the left
+    glove_y += GLOVE_SPEED  # cause object to fall
 
 
-    if glove_y > HEIGHT: # if object moves off screen
-        glove_x = random.randrange(0, WIDTH) # new object falls from different x position on screen
-        glove_y = -25 # bring new object at different position
-        GLOVE = scale_image(pygame.image.load("images/"+random.choice(WASTE)), 0.1) # select random waste
+    if glove_y > HEIGHT:  # if object moves off screen
+        glove_x = random.randrange(0, WIDTH)  # new object falls from different x position on screen
+        glove_y = -25  # bring new object at different position
+        GLOVE = scale_image(pygame.image.load("images/" + random.choice(WASTE)), 0.1)  # select random waste
+        scoreboard.add()
 
 pygame.quit()

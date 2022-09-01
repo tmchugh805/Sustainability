@@ -10,14 +10,14 @@ from score import score
 pygame.mixer.pre_init(44100, 16, 2, 4096)
 pygame.init()
 
-WASTE = ["gloves.jpg", "bin.jpg", "lab.jpg"]
+WASTE = ["Gloves.png", "Chemical powder.png", "Eppendorf.png", "Chemical powder.png", "Broken Flask.png", "Syringe Tip.png"]
 # load images
 LAB = pygame.image.load("images/lab.jpg")
-GLOVE = scale_image(pygame.image.load("images/" + random.choice(WASTE)), 0.1)
-BIN1 = scale_image(pygame.image.load("images/bin.jpg"), 0.1)
-BIN2 = scale_image(pygame.image.load("images/bin.jpg"), 0.1)
-BIN3 = scale_image(pygame.image.load("images/bin.jpg"), 0.1)
-BIN4 = scale_image(pygame.image.load("images/bin.jpg"), 0.1)
+GLOVE = scale_image(pygame.image.load("images/" + random.choice(WASTE)), 50)
+BIN1 = scale_image(pygame.image.load("images/Bin.png"), 75)
+BIN2 = scale_image(pygame.image.load("images/Bin.png"), 75)
+BIN3 = scale_image(pygame.image.load("images/Bin.png"), 75)
+BIN4 = scale_image(pygame.image.load("images/Bin.png"), 75)
 
 # set window
 WIDTH, HEIGHT = LAB.get_width(), LAB.get_height()
@@ -62,16 +62,16 @@ while run:
 
         key = pygame.key.get_pressed()
         if key[pygame.K_RIGHT]:  # if user presses right arrow key
-            glove_x += 10  # move object to the right
+            glove_x += 100  # move object to the right
         elif key[pygame.K_LEFT]:  # if user presses left arrow key
-            glove_x -= 10  # move object to the left
+            glove_x -= 100  # move object to the left
     glove_y += GLOVE_SPEED  # cause object to fall
 
 
     if glove_y > HEIGHT:  # if object moves off screen
         glove_x = random.randrange(0, WIDTH)  # new object falls from different x position on screen
         glove_y = -25  # bring new object at different position
-        GLOVE = scale_image(pygame.image.load("images/" + random.choice(WASTE)), 0.1)  # select random waste
+        GLOVE = scale_image(pygame.image.load("images/" + random.choice(WASTE)), 50)  # select random waste
         scoreboard.add()
 
 pygame.quit()

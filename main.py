@@ -1,8 +1,7 @@
 import random
 
 import pygame
-from utils import scale_image
-from utils import draw
+from utils import scale_image, draw, Bin, Waste, Item
 from score import score
 
 
@@ -11,13 +10,15 @@ pygame.mixer.pre_init(44100, 16, 2, 4096)
 pygame.init()
 
 WASTE = ["Gloves.png", "Chemical powder.png", "Eppendorf.png", "Chemical powder.png", "Broken Flask.png", "Syringe Tip.png"]
+
+
 # load images
-LAB = pygame.image.load("images/lab.jpg")
-GLOVE = scale_image(pygame.image.load("images/" + random.choice(WASTE)), 50)
-BIN1 = scale_image(pygame.image.load("images/Bin.png"), 75)
-BIN2 = scale_image(pygame.image.load("images/Bin.png"), 75)
-BIN3 = scale_image(pygame.image.load("images/Bin.png"), 75)
-BIN4 = scale_image(pygame.image.load("images/Bin.png"), 75)
+LAB = Item("images/lab.jpg").load_image()
+GLOVE = Waste("images/" + random.choice(WASTE)).load_image(50)
+BIN1 = Bin(item_path="images/Bin.png", position=(0, 300), bin_type="images/Bin.png").load_image(75)
+BIN2 = Bin(item_path="images/Bin.png", position=(100, 300), bin_type="images/Bin.png").load_image(75)
+BIN3 = Bin(item_path="images/Bin.png", position=(200, 300), bin_type="images/Bin.png").load_image(75)
+BIN4 = Bin(item_path="images/Bin.png", position=(300, 300), bin_type="images/Bin.png").load_image(75)
 
 # set window
 WIDTH, HEIGHT = LAB.get_width(), LAB.get_height()

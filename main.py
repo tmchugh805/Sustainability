@@ -8,14 +8,6 @@ from utils import scale_image, draw, Bin, Waste, Item, Score
 def main():
     run = True
 
-    # WASTE = ["Gloves.png", "Chemical powder.png", "Eppendorf.png", "Chemical powder.png", "Broken Flask.png",
-    #          "Syringe Tip.png"]
-    # # load images
-    # GLOVE = scale_image(pygame.image.load("images/" + random.choice(WASTE)), 50)
-    # BIN1 = scale_image(pygame.image.load("images/Bin.png"), 75)
-    # BIN2 = scale_image(pygame.image.load("images/Bin.png"), 75)
-    # BIN3 = scale_image(pygame.image.load("images/Bin.png"), 75)
-    # BIN4 = scale_image(pygame.image.load("images/Bin.png"), 75)
     WASTE = ["Gloves.png", "Chemical powder.png", "Eppendorf.png", "Chemical powder.png", "Broken Flask.png", "Syringe Tip.png"]
 
 

@@ -1,3 +1,2 @@
 # Sustainability
-A starter code for making a lab sustainability game
-This is to initaiate the main project which is, build a sustainability game for the SBS Sustainability Group at the University of Edinburgh
+A video game to train users how to dispose off waste safely and sustainably.

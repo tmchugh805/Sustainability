@@ -24,11 +24,12 @@ def main():
     ## set initial image position
     glove_x = random.randrange(0, WIDTH)
     glove_y = 0
+    move_right = False
+    move_left = False
     count = 0
 
     while run:
         clock.tick(FPS)  # keep image at FPS 60 on all devices
-
         draw(WIN, images)  # draw all static images
         WIN.blit(GLOVE, (glove_x, glove_y))  # draw image of glove
         scoreboard.display(WIN)
@@ -68,8 +69,6 @@ def main():
 def main_menu(screen, clock, FPS, scoreboard):
     pygame.display.set_caption("Main Menu")
     run = True
-    move_right = False
-    move_left = False
     bright_green = (0, 255, 0)
     bright_red = (255, 0, 0)
     red = (200, 0, 0)

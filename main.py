@@ -50,7 +50,8 @@ glove_y = 0
 run = True
 clock = pygame.time.Clock()
 images = [(LAB, (0,0)), (BIN1, (0, 300)), (BIN2, (100, 300)), (BIN3, (200, 300)), (BIN4, (300, 300))]
-
+move_right = False
+move_left = False
 
 while run:
     clock.tick(FPS) # keep image at FPS 60 on all devices
@@ -60,17 +61,24 @@ while run:
 
     pygame.display.update() # show your drawings on screen
 
-
     for event in pygame.event.get():  # loop through all events
-        if event.type == pygame.QUIT: # if user presses clicks X
+        if event.type == pygame.KEYDOWN:
+            if event.key == pygame.K_RIGHT: # if user presses right arrow key
+                move_right = True
+            if event.key == pygame.K_LEFT: # if user presses left arrow key
+                move_left = True
+        elif event.type == pygame.KEYUP:
+            if event.key == pygame.K_RIGHT: # if user releases right arrow key
+                move_right = False
+            if event.key == pygame.K_LEFT: # if user releases left arrow key
+                move_left = False
+        elif event.type == pygame.QUIT: # if user presses clicks X
             run = False
             break
-
-        key = pygame.key.get_pressed()
-        if key[pygame.K_RIGHT]: # if user presses right arrow key
-            glove_x += 10 # move object to the right
-        elif key[pygame.K_LEFT]: # if user presses left arrow key
-            glove_x -= 10 # move object to the left
+    if move_right:
+        glove_x += 1 # move object to the right
+    if move_left:
+        glove_x -= 1 # move object to the left
     glove_y += GLOVE_SPEED # cause object to fall
 
 

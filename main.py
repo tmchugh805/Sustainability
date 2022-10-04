@@ -37,19 +37,25 @@ def main():
         if count == 2:  # if user presses clicks X
             break
 
-        for event in pygame.event.get():
-
-            # loop through all events
-            if event.type == pygame.QUIT:  # if user presses clicks X
+        for event in pygame.event.get():  # loop through all events
+            if event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_RIGHT: # if user presses right arrow key
+                    move_right = True
+                if event.key == pygame.K_LEFT: # if user presses left arrow key
+                    move_left = True
+            elif event.type == pygame.KEYUP:
+                if event.key == pygame.K_RIGHT: # if user releases right arrow key
+                    move_right = False
+                if event.key == pygame.K_LEFT: # if user releases left arrow key
+                    move_left = False
+            elif event.type == pygame.QUIT: # if user presses clicks X
                 run = False
                 break
-
-            key = pygame.key.get_pressed()
-            if key[pygame.K_RIGHT]:  # if user presses right arrow key
-                glove_x += 100  # move object to the right
-            elif key[pygame.K_LEFT]:  # if user presses left arrow key
-                glove_x -= 100  # move object to the left
-        glove_y += GLOVE_SPEED  # cause object to fall
+        if move_right:
+            glove_x += 1 # move object to the right
+        if move_left:
+            glove_x -= 1 # move object to the left
+        glove_y += GLOVE_SPEED # cause object to fall
 
         if glove_y > HEIGHT:  # if object moves off screen
             glove_x = random.randrange(0, WIDTH)  # new object falls from different x position on screen
@@ -62,6 +68,8 @@ def main():
 def main_menu(screen, clock, FPS, scoreboard):
     pygame.display.set_caption("Main Menu")
     run = True
+    move_right = False
+    move_left = False
     bright_green = (0, 255, 0)
     bright_red = (255, 0, 0)
     red = (200, 0, 0)

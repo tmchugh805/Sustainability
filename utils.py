@@ -14,4 +14,3 @@ def draw(win, images):
         win.blit(img, pos)
 
 
-

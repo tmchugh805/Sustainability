@@ -29,3 +29,6 @@ class score:
         label = myfont.render("Score: "+str(self.number), 1, RED)
         screen.blit(label, (self.x_position, self.y_position))
         pygame.display.update()
+
+    def reset(self):
+        self.number = 0

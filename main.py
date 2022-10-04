@@ -1,9 +1,7 @@
 import random
 
 import pygame
-from utils import scale_image
-from utils import draw
-from score import score
+from utils import scale_image, draw, Score
 
 
 def main():
@@ -134,6 +132,6 @@ FPS = 60
 
 # code for main game
 clock = pygame.time.Clock()
-scoreboard = score(0, 500, 10)
+scoreboard = Score(0, 500, 10)
 
 main_menu(WIN, clock, FPS, scoreboard)

@@ -1,32 +1,33 @@
 import random
-
+import pandas as pd
 import pygame
-from utils import scale_image, draw, Bin, Waste, Item, Score
+from utils import draw, Bin, Waste, Item, Score
 
 
 
 def main():
     run = True
-
-    WASTE = ["Gloves.png", "Chemical powder.png", "Eppendorf.png", "Chemical powder.png", "Broken Flask.png", "Syringe Tip.png"]
+    file_name = 'Waste_List.csv'
+    df = pd.read_csv(file_name)
+    i = random.choice(range(len(df)))
 
 
     # load images
     LAB = Item("images/lab.jpg").load_image()
-    GLOVE = Waste("images/" + random.choice(WASTE)).load_image(50)
+    WASTE = Waste("images/" + df.Image[i], df.Waste[i], df.Bin[i], df.Biohazard[i], df.Sharp[i], df.Toxic[i]).load_image(50)
     BIN1 = Bin(item_path="images/Bin.png", position=(0, 300), bin_type="images/Bin.png").load_image(75)
     BIN2 = Bin(item_path="images/Bin.png", position=(100, 300), bin_type="images/Bin.png").load_image(75)
     BIN3 = Bin(item_path="images/Bin.png", position=(200, 300), bin_type="images/Bin.png").load_image(75)
     BIN4 = Bin(item_path="images/Bin.png", position=(300, 300), bin_type="images/Bin.png").load_image(75)
 
-    GLOVE_SPEED = 1
+    WASTE_SPEED = 1
 
     images = [(LAB, (0, 0)), (BIN1, (0, 300)), (BIN2, (100, 300)), (BIN3, (200, 300)), (BIN4, (300, 300))]
     scoreboard.reset()
 
     ## set initial image position
-    glove_x = random.randrange(0, WIDTH)
-    glove_y = 0
+    waste_x = random.randrange(0, WIDTH)
+    waste_y = 0
     move_right = False
     move_left = False
     count = 0
@@ -34,11 +35,11 @@ def main():
     while run:
         clock.tick(FPS)  # keep image at FPS 60 on all devices
         draw(WIN, images)  # draw all static images
-        WIN.blit(GLOVE, (glove_x, glove_y))  # draw image of glove
+        WIN.blit(WASTE, (waste_x, waste_y))  # draw image of waste
         scoreboard.display(WIN)
         pygame.display.update()  # show your drawings on screen
 
-        if count == 2:  # if user presses clicks X
+        if count == 10:  # if user presses clicks X
             break
 
         for event in pygame.event.get():  # loop through all events
@@ -56,15 +57,16 @@ def main():
                 run = False
                 break
         if move_right:
-            glove_x += 1 # move object to the right
+            waste_x += 1 # move object to the right
         if move_left:
-            glove_x -= 1 # move object to the left
-        glove_y += GLOVE_SPEED # cause object to fall
+            waste_x -= 1 # move object to the left
+        waste_y += WASTE_SPEED # cause object to fall
 
-        if glove_y > HEIGHT:  # if object moves off screen
-            glove_x = random.randrange(0, WIDTH)  # new object falls from different x position on screen
-            glove_y = -25  # bring new object at different position
-            GLOVE = scale_image(pygame.image.load("images/" + random.choice(WASTE)), 50)  # select random waste
+        if waste_y > HEIGHT:  # if object moves off screen
+            waste_x = random.randrange(0, WIDTH)  # new object falls from different x position on screen
+            waste_y = -25  # bring new object at different position
+            i = random.choice(range(len(df)))
+            WASTE = Waste("images/" + df.Image[i], df.Waste[i], df.Bin[i], df.Biohazard[i], df.Sharp[i], df.Toxic[i]).load_image(50)  # select random waste
             scoreboard.add()
             count = count + 1
 

@@ -32,9 +32,13 @@ class Bin(Item):
 
 
 class Waste(Item):
-    def __init__(self, item_path: str=None, waste_type: str=None):
+    def __init__(self, item_path: str=None, waste_type: str=None, bin: str=None, bioharzard: bool=False, sharp: bool=False, toxic: bool=False):
         super().__init__(item_path)
         self.waste_type = waste_type
+        self.bin = bin
+        self.bioharzard = bioharzard
+        self.sharp = sharp
+        self.toxic = toxic
 
 # create an item class
 # create a bin class that inherits from am item class

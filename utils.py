@@ -14,6 +14,13 @@ def draw(win, images):
 
 
 class Item:
+    """
+    Create PyGame Object from image
+    Parameters:
+        item_path: (str) - Path to image file
+    Attributes:
+        load_image: returns a scaled Pygame Object from image
+    """
     def __init__(self, item_path: str=None):
         self.item_path = item_path
 

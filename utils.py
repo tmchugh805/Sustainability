@@ -32,6 +32,15 @@ class Item:
 
 
 class Bin(Item):
+    """
+    Create PyGame Object from image of Bin
+    Parameters:
+        item_path: (str) - Path to image file
+        position: (tuple) - Location of bin on game window
+        bin_type: (str) - Purpose of bin
+    Attributes:
+        load_image: returns a scaled Pygame Object from image
+    """
     def __init__(self, item_path: str=None, position: tuple=None, bin_type: str=None):
         super().__init__(item_path)
         self.position = position

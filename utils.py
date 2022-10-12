@@ -48,6 +48,14 @@ class Bin(Item):
 
 
 class Waste(Item):
+    """
+    Create PyGame Object from image of Waste
+    Parameters:
+        item_path: (str) - Path to image file
+        waste_type: (str) - Purpose of bin
+    Attributes:
+        load_image: returns a scaled Pygame Object from image
+    """
     def __init__(self, item_path: str=None, waste_type: str=None):
         super().__init__(item_path)
         self.waste_type = waste_type

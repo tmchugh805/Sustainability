@@ -31,13 +31,20 @@ def main():
     move_right = False
     move_left = False
     count = 0
+    x_change = 0
+    MAX_x_SPEED = 10
+
 
     while run:
         clock.tick(FPS)  # keep image at FPS 60 on all devices
         draw(WIN, images)  # draw all static images
         WIN.blit(WASTE, (waste_x, waste_y))  # draw image of waste
+        font = pygame.font.SysFont("calibri", 20, bold=True, italic=False)
+        WIN.blit(font.render(df.Waste[i], True, (0, 200, 0)), (200, 10))  # display waste name on screen
         scoreboard.display(WIN)
         pygame.display.update()  # show your drawings on screen
+
+
 
         if count == 10:  # if user presses clicks X
             break
@@ -46,21 +53,55 @@ def main():
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_RIGHT: # if user presses right arrow key
                     move_right = True
+                    x_change = 2  # initial speed
                 if event.key == pygame.K_LEFT: # if user presses left arrow key
                     move_left = True
+                    x_change = -2  # initial speed
             elif event.type == pygame.KEYUP:
                 if event.key == pygame.K_RIGHT: # if user releases right arrow key
                     move_right = False
+                    x_change = 0  # stop waste
                 if event.key == pygame.K_LEFT: # if user releases left arrow key
                     move_left = False
+                    x_change = 0  # stop waste
             elif event.type == pygame.QUIT: # if user presses clicks X
                 run = False
                 break
         if move_right:
-            waste_x += 1 # move object to the right
+            x_accel = 0.2  # right acceleration
+            x_change += x_accel
         if move_left:
-            waste_x -= 1 # move object to the left
-        waste_y += WASTE_SPEED # cause object to fall
+            x_accel = -0.2  # left acceleration
+            x_change += x_accel
+
+        if abs(x_change) >= MAX_x_SPEED:  # limit speed below maximal speed
+            if x_change > 0:
+                x_change = MAX_x_SPEED
+            else:
+                x_change = - MAX_x_SPEED
+
+        waste_x += x_change
+        waste_y += WASTE_SPEED  # cause object to fall
+
+        # for event in pygame.event.get():  # loop through all events
+        #     if event.type == pygame.KEYDOWN:
+        #         if event.key == pygame.K_RIGHT: # if user presses right arrow key
+        #             move_right = True
+        #         if event.key == pygame.K_LEFT: # if user presses left arrow key
+        #             move_left = True
+        #     elif event.type == pygame.KEYUP:
+        #         if event.key == pygame.K_RIGHT: # if user releases right arrow key
+        #             move_right = False
+        #         if event.key == pygame.K_LEFT: # if user releases left arrow key
+        #             move_left = False
+        #     elif event.type == pygame.QUIT: # if user presses clicks X
+        #         run = False
+        #         break
+        # if move_right:
+        #     waste_x += 1  # move object to the right
+        # if move_left:
+        #     waste_x -= 1  # move object to the left
+        # waste_y += WASTE_SPEED # cause object to fall
 
         if waste_y > HEIGHT:  # if object moves off screen
             waste_x = random.randrange(0, WIDTH)  # new object falls from different x position on screen

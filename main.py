@@ -135,7 +135,7 @@ pygame.init()
 
 LAB = pygame.image.load("images/lab.jpg")
 WIDTH, HEIGHT = LAB.get_width(), LAB.get_height()
-WIN = pygame.display.set_mode((WIDTH, HEIGHT))
+WIN = pygame.display.set_mode((WIDTH, HEIGHT), pygame.RESIZABLE)
 
 # set window name
 pygame.display.set_caption("Sustainability Game!!!")

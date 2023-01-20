@@ -20,8 +20,6 @@ def main():
     BIN3 = Bin(item_path="images/Bin.png", position=(200, 300), bin_type="images/Bin.png").load_image(75)
     BIN4 = Bin(item_path="images/Bin.png", position=(300, 300), bin_type="images/Bin.png").load_image(75)
 
-    WASTE_SPEED = 1
-
     images = [(LAB, (0, 0)), (BIN1, (0, 300)), (BIN2, (100, 300)), (BIN3, (200, 300)), (BIN4, (300, 300))]
     scoreboard.reset()
 
@@ -30,9 +28,11 @@ def main():
     waste_y = 0
     move_right = False
     move_left = False
+    move_down = False
     count = 0
     x_change = 0
     MAX_x_SPEED = 10
+    y_change = 1
 
 
     while run:
@@ -57,6 +57,8 @@ def main():
                 if event.key == pygame.K_LEFT: # if user presses left arrow key
                     move_left = True
                     x_change = -2  # initial speed
+                if event.key == pygame.K_DOWN: # if user presses left arrow key
+                    move_down = True
             elif event.type == pygame.KEYUP:
                 if event.key == pygame.K_RIGHT: # if user releases right arrow key
                     move_right = False
@@ -64,6 +66,9 @@ def main():
                 if event.key == pygame.K_LEFT: # if user releases left arrow key
                     move_left = False
                     x_change = 0  # stop waste
+                if event.key == pygame.K_DOWN: # if user presses left arrow key
+                    move_down = False
+                    y_change = 1  # reset step falling speed
             elif event.type == pygame.QUIT: # if user presses clicks X
                 run = False
                 break
@@ -73,6 +78,9 @@ def main():
         if move_left:
             x_accel = -0.2  # left acceleration
             x_change += x_accel
+        if move_down:
+            y_accel = 0.5  # down acceleration
+            y_change += y_accel
 
         if abs(x_change) >= MAX_x_SPEED:  # limit speed below maximal speed
             if x_change > 0:
@@ -81,7 +89,7 @@ def main():
                 x_change = - MAX_x_SPEED
 
         waste_x += x_change
-        waste_y += WASTE_SPEED  # cause object to fall
+        waste_y += y_change  # cause object to fall
 
         # for event in pygame.event.get():  # loop through all events
         #     if event.type == pygame.KEYDOWN:

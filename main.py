@@ -4,23 +4,32 @@ import pygame
 from utils import draw, Bin, Waste, Item, Score
 
 
-
 def main():
     run = True
     file_name = 'Waste_List.csv'
     df = pd.read_csv(file_name)
     i = random.choice(range(len(df)))
 
-
     # load images
     LAB = Item("images/lab.jpg").load_image()
-    WASTE = Waste("images/" + df.Image[i], df.Waste[i], df.Bin[i], df.Biohazard[i], df.Sharp[i], df.Toxic[i]).load_image(50)
-    BIN1 = Bin(item_path="images/Bin.png", position=(0, 300), bin_type="images/Bin.png").load_image(75)
-    BIN2 = Bin(item_path="images/Bin.png", position=(100, 300), bin_type="images/Bin.png").load_image(75)
-    BIN3 = Bin(item_path="images/Bin.png", position=(200, 300), bin_type="images/Bin.png").load_image(75)
-    BIN4 = Bin(item_path="images/Bin.png", position=(300, 300), bin_type="images/Bin.png").load_image(75)
+    WASTE = Waste("images/" + df.Image[i], df.Waste[i], df.Bin[i], df.Biohazard[i], df.Sharp[i],
+                  df.Toxic[i])
+    WASTE_IMAGE = WASTE.load_image(50)
+    BinArray = []
+    BinArray.append(Bin(item_path="images/Bin.png", position=(0, 300), bin_type="Autoclave"))
+    BinArray.append(Bin(item_path="images/Toxic.png", position=(100, 300), bin_type="Yellow"))
+    BinArray.append(Bin(item_path="images/Bin.png", position=(200, 300), bin_type="Glass"))
+    BinArray.append(Bin(item_path="images/Bin.png", position=(300, 300), bin_type="Sharps"))
+    BinArray.append(Bin(item_path="images/Bin.png", position=(400, 300), bin_type="General"))
+    BinArray.append(Bin(item_path="images/Recycle.png", position=(500, 300), bin_type="Recycling"))
+    BinArray.append(Bin(item_path="images/Cytotoxic.png", position=(600, 300), bin_type="Cytotoxic"))
+    BinArray.append(Bin(item_path="images/Bin.png", position=(700, 300), bin_type="Other"))
 
-    images = [(LAB, (0, 0)), (BIN1, (0, 300)), (BIN2, (100, 300)), (BIN3, (200, 300)), (BIN4, (300, 300))]
+    images = [(LAB, (0, 0)), (BinArray[0].load_image(75), (0, 300)), (BinArray[1].load_image(75), (100, 300)),
+              (BinArray[2].load_image(75), (200, 300)),
+              (BinArray[3].load_image(75), (300, 300)), (BinArray[4].load_image(75), (400, 300)),
+              (BinArray[5].load_image(75), (500, 300)),
+              (BinArray[6].load_image(75), (600, 300)), (BinArray[7].load_image(75), (700, 300))]
     scoreboard.reset()
 
     ## set initial image position
@@ -34,42 +43,39 @@ def main():
     MAX_x_SPEED = 10
     y_change = 1
 
-
     while run:
         clock.tick(FPS)  # keep image at FPS 60 on all devices
         draw(WIN, images)  # draw all static images
-        WIN.blit(WASTE, (waste_x, waste_y))  # draw image of waste
+        WIN.blit(WASTE_IMAGE, (waste_x, waste_y))  # draw image of waste
         font = pygame.font.SysFont("calibri", 20, bold=True, italic=False)
         WIN.blit(font.render(df.Waste[i], True, (0, 200, 0)), (200, 10))  # display waste name on screen
         scoreboard.display(WIN)
         pygame.display.update()  # show your drawings on screen
 
-
-
-        if count == 10:  # if user presses clicks X
+        if count == 20:  # if user presses clicks X
             break
 
         for event in pygame.event.get():  # loop through all events
             if event.type == pygame.KEYDOWN:
-                if event.key == pygame.K_RIGHT: # if user presses right arrow key
+                if event.key == pygame.K_RIGHT:  # if user presses right arrow key
                     move_right = True
                     x_change = 2  # initial speed
-                if event.key == pygame.K_LEFT: # if user presses left arrow key
+                if event.key == pygame.K_LEFT:  # if user presses left arrow key
                     move_left = True
                     x_change = -2  # initial speed
-                if event.key == pygame.K_DOWN: # if user presses left arrow key
+                if event.key == pygame.K_DOWN:  # if user presses left arrow key
                     move_down = True
             elif event.type == pygame.KEYUP:
-                if event.key == pygame.K_RIGHT: # if user releases right arrow key
+                if event.key == pygame.K_RIGHT:  # if user releases right arrow key
                     move_right = False
                     x_change = 0  # stop waste
-                if event.key == pygame.K_LEFT: # if user releases left arrow key
+                if event.key == pygame.K_LEFT:  # if user releases left arrow key
                     move_left = False
                     x_change = 0  # stop waste
-                if event.key == pygame.K_DOWN: # if user presses left arrow key
+                if event.key == pygame.K_DOWN:  # if user presses left arrow key
                     move_down = False
                     y_change = 1  # reset step falling speed
-            elif event.type == pygame.QUIT: # if user presses clicks X
+            elif event.type == pygame.QUIT:  # if user presses clicks X
                 run = False
                 break
         if move_right:
@@ -112,12 +118,26 @@ def main():
         # waste_y += WASTE_SPEED # cause object to fall
 
         if waste_y > HEIGHT:  # if object moves off screen
+            correct_bin = WASTE.get_bintype()
+            actual_bin = which_bin(waste_x, BinArray)
+            if correct_bin == actual_bin:
+                scoreboard.add()
             waste_x = random.randrange(0, WIDTH)  # new object falls from different x position on screen
             waste_y = -25  # bring new object at different position
             i = random.choice(range(len(df)))
-            WASTE = Waste("images/" + df.Image[i], df.Waste[i], df.Bin[i], df.Biohazard[i], df.Sharp[i], df.Toxic[i]).load_image(50)  # select random waste
-            scoreboard.add()
+            WASTE = Waste("images/" + df.Image[i], df.Waste[i], df.Bin[i], df.Biohazard[i], df.Sharp[i],
+                          df.Toxic[i])
+            WASTE_IMAGE = WASTE.load_image(50)  # select random waste
             count = count + 1
+
+
+def which_bin(waste_x, binarray):
+    for bin in binarray:
+        bin_position = bin.get_position()
+        x_position = bin_position[0]
+        if x_position <= waste_x < (x_position + 100):
+            return bin.get_bintype()
+    return "Null"
 
 
 def main_menu(screen, clock, FPS, scoreboard):

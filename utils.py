@@ -46,6 +46,13 @@ class Bin(Item):
         self.position = position
         self.bin_type = bin_type
 
+    def get_bintype(self):
+        bin_type = self.bin_type
+        return bin_type
+
+    def get_position(self):
+        return self.position
+
 
 class Waste(Item):
     """
@@ -56,9 +63,16 @@ class Waste(Item):
     Attributes:
         load_image: returns a scaled Pygame Object from image
     """
-    def __init__(self, item_path: str=None, waste_type: str=None):
+    def __init__(self, item_path: str=None, waste_type: str=None, bin_type: str=None, biohazard: str=None, sharp: str=None, toxic: str=None):
         super().__init__(item_path)
         self.waste_type = waste_type
+        self.bin_type = bin_type
+        self.biohazard = biohazard
+        self.sharp = sharp
+        self.toxic = toxic
+
+    def get_bintype(self):
+        return self.bin_type
 
 # create an item class
 # create a bin class that inherits from am item class

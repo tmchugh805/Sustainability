@@ -1,5 +1,9 @@
-Waste,Image,Bin,Biohazard,Sharp,Toxic
-Gloves,Gloves.png,Yellow,FALSE,FALSE,FALSE
+﻿Waste,Image,Bin,Biohazard,Sharp,Toxic
+Broken Flask,Broken Flask.png,Glass,FALSE,FALSE,FALSE
 Chemical Powder,Chemical Powder.png,Yellow,FALSE,FALSE,TRUE
-Gloves,Gloves.png,Autoclave,TRUE,FALSE,FALSE
+Eppendorf (No GM),Eppendorf.png,Yellow,FALSE,FALSE,FALSE
+Eppendorf (With GM),Eppendorf.png,Autoclave,TRUE,FALSE,FALSE
+Gloves (No GM),gloves.png,Yellow,FALSE,FALSE,FALSE
+Gloves (With GMO),gloves.png,Autoclave,TRUE,FALSE,FALSE
 Recombinant Protein,Recombinant protein.png,Autoclave,TRUE,FALSE,FALSE
+Syringe Tip,Syringe Tip.png,Sharps,TRUE,TRUE,FALSE

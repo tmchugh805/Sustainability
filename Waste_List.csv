@@ -1,5 +1,0 @@
-Waste,Image,Bin,Biohazard,Sharp,Toxic
-Gloves,Gloves.png,Yellow,FALSE,FALSE,FALSE
-Chemical Powder,Chemical Powder.png,Yellow,FALSE,FALSE,TRUE
-Gloves,Gloves.png,Autoclave,TRUE,FALSE,FALSE
-Recombinant Protein,Recombinant protein.png,Autoclave,TRUE,FALSE,FALSE

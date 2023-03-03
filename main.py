@@ -4,14 +4,17 @@ import pygame
 from utils import draw, Bin, Waste, Item, Score
 
 
+
 def main():
     run = True
     file_name = 'Waste_List.csv'
     df = pd.read_csv(file_name)
     i = random.choice(range(len(df)))
 
+    binheight = 450
+
     # load images
-    LAB = Item("images/lab.jpg").load_image()
+    LAB = Item("images/lab.jpg").load_image(800)
     WASTE = Waste("images/" + df.Image[i], df.Waste[i], df.Bin[i], df.Biohazard[i], df.Sharp[i],
                   df.Toxic[i])
     WASTE_IMAGE = WASTE.load_image(50)
@@ -25,11 +28,11 @@ def main():
     BinArray.append(Bin(item_path="images/Cytotoxic.png", position=(600, 300), bin_type="Cytotoxic"))
     BinArray.append(Bin(item_path="images/Bin.png", position=(700, 300), bin_type="Other"))
 
-    images = [(LAB, (0, 0)), (BinArray[0].load_image(75), (0, 300)), (BinArray[1].load_image(75), (100, 300)),
-              (BinArray[2].load_image(75), (200, 300)),
-              (BinArray[3].load_image(75), (300, 300)), (BinArray[4].load_image(75), (400, 300)),
-              (BinArray[5].load_image(75), (500, 300)),
-              (BinArray[6].load_image(75), (600, 300)), (BinArray[7].load_image(75), (700, 300))]
+    images = [(LAB, (0, 0)), (BinArray[0].load_image(75), (0, binheight)), (BinArray[1].load_image(75), (100, binheight)),
+              (BinArray[2].load_image(75), (200, binheight)),
+              (BinArray[3].load_image(75), (300, binheight)), (BinArray[4].load_image(75), (400, binheight)),
+              (BinArray[5].load_image(75), (500, binheight)),
+              (BinArray[6].load_image(75), (600, binheight)), (BinArray[7].load_image(75), (700, binheight))]
     scoreboard.reset()
 
     ## set initial image position
@@ -43,39 +46,42 @@ def main():
     MAX_x_SPEED = 10
     y_change = 1
 
+
     while run:
         clock.tick(FPS)  # keep image at FPS 60 on all devices
         draw(WIN, images)  # draw all static images
         WIN.blit(WASTE_IMAGE, (waste_x, waste_y))  # draw image of waste
         font = pygame.font.SysFont("calibri", 20, bold=True, italic=False)
-        WIN.blit(font.render(df.Waste[i], True, (0, 200, 0)), (200, 10))  # display waste name on screen
+        WIN.blit(font.render(df.Waste[i], True, (0, 0, 0)), (50, 10))  # display waste name on screen
         scoreboard.display(WIN)
         pygame.display.update()  # show your drawings on screen
 
-        if count == 20:  # if user presses clicks X
+
+
+        if count == 10:  # if user presses clicks X
             break
 
         for event in pygame.event.get():  # loop through all events
             if event.type == pygame.KEYDOWN:
-                if event.key == pygame.K_RIGHT:  # if user presses right arrow key
+                if event.key == pygame.K_RIGHT: # if user presses right arrow key
                     move_right = True
                     x_change = 2  # initial speed
-                if event.key == pygame.K_LEFT:  # if user presses left arrow key
+                if event.key == pygame.K_LEFT: # if user presses left arrow key
                     move_left = True
                     x_change = -2  # initial speed
-                if event.key == pygame.K_DOWN:  # if user presses left arrow key
+                if event.key == pygame.K_DOWN: # if user presses left arrow key
                     move_down = True
             elif event.type == pygame.KEYUP:
-                if event.key == pygame.K_RIGHT:  # if user releases right arrow key
+                if event.key == pygame.K_RIGHT: # if user releases right arrow key
                     move_right = False
                     x_change = 0  # stop waste
-                if event.key == pygame.K_LEFT:  # if user releases left arrow key
+                if event.key == pygame.K_LEFT: # if user releases left arrow key
                     move_left = False
                     x_change = 0  # stop waste
-                if event.key == pygame.K_DOWN:  # if user presses left arrow key
+                if event.key == pygame.K_DOWN: # if user presses left arrow key
                     move_down = False
                     y_change = 1  # reset step falling speed
-            elif event.type == pygame.QUIT:  # if user presses clicks X
+            elif event.type == pygame.QUIT: # if user presses clicks X
                 run = False
                 break
         if move_right:
@@ -162,26 +168,33 @@ def main_menu(screen, clock, FPS, scoreboard):
                 quit()
                 run = False
 
-            if 400 + 100 > mouse[0] > 400 and 250 + 50 > mouse[1] > 250:
-                pygame.draw.rect(screen, bright_green, (400, 250, 100, 50))
+            width = 100
+            height = 50
+
+            xposition = 600
+            ypostiongreen = 350
+            ypostionred = 400
+
+            if xposition + width > mouse[0] > xposition and ypostiongreen + height > mouse[1] > ypostiongreen:
+                pygame.draw.rect(screen, bright_green, (xposition, ypostiongreen, width, height))
 
                 if event.type == pygame.MOUSEBUTTONDOWN:
                     main()
             else:
-                pygame.draw.rect(screen, green, (400, 250, 100, 50))
+                pygame.draw.rect(screen, green, (xposition, ypostiongreen, width, height))
 
-            if 400 + 100 > mouse[0] > 400 and 300 + 75 > mouse[1] > 300:
-                pygame.draw.rect(screen, bright_red, (400, 300, 100, 50))
+            if xposition + width > mouse[0] > xposition and ypostionred + 75 > mouse[1] > ypostionred:
+                pygame.draw.rect(screen, bright_red, (xposition, ypostionred, width, height))
 
                 if event.type == pygame.MOUSEBUTTONDOWN:
                     run = False
                     break
             else:
-                pygame.draw.rect(screen, red, (400, 300, 100, 50))
+                pygame.draw.rect(screen, red, (xposition, ypostionred, width, height))
 
-            screen.blit(font_large.render("Waste Disposal Game", True, (255, 255, 255)), (325, 50))
-            screen.blit(font.render("Play", True, (0, 0, 0)), (417, 285))
-            screen.blit(font.render("Quit", True, (0, 0, 0)), (417, 330))
+           # screen.blit(font_large.render("Waste Disposal Game", True, (255, 255, 255)), (325, 50))
+            screen.blit(font.render("Play", True, (0, 0, 0)), ((xposition+17), (ypostiongreen+30)))
+            screen.blit(font.render("Quit", True, (0, 0, 0)), ((xposition+17), (ypostionred+30)))
             screen.blit(font_large.render("Final Score: " + str(Finalscore), True, (0, 0, 0)), (150, 150))
 
         pygame.display.flip()
@@ -198,7 +211,7 @@ pygame.init()
 
 LAB = pygame.image.load("images/lab.jpg")
 WIDTH, HEIGHT = LAB.get_width(), LAB.get_height()
-WIN = pygame.display.set_mode((WIDTH, HEIGHT), pygame.RESIZABLE)
+WIN = pygame.display.set_mode((800, 550), pygame.RESIZABLE)
 
 # set window name
 pygame.display.set_caption("Sustainability Game!!!")
@@ -213,6 +226,6 @@ FPS = 60
 
 # code for main game
 clock = pygame.time.Clock()
-scoreboard = Score(0, 500, 10)
+scoreboard = Score(0, 700, 10)
 
 main_menu(WIN, clock, FPS, scoreboard)

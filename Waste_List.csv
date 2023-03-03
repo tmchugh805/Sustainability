@@ -7,3 +7,7 @@ Gloves (No GM),gloves.png,Yellow,FALSE,FALSE,FALSE
 Gloves (With GMO),gloves.png,Autoclave,TRUE,FALSE,FALSE
 Recombinant Protein,Recombinant protein.png,Autoclave,TRUE,FALSE,FALSE
 Syringe Tip,Syringe Tip.png,Sharps,TRUE,TRUE,FALSE
+Tissue (Wiping Bench),TissueRoll.png,Autoclave,TRUE,FALSE,FALSE
+Razor Blade,RazorBlade.png,Sharps,TRUE,TRUE,TRUE
+Falcon (buffer),Falcon.png,Yellow,FALSE,FALSE,FALSE
+Falcon (bacteria),Falcon.png,Autoclave,TRUE,FALSE,FALSE

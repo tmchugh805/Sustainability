@@ -14,6 +14,13 @@ def draw(win, images):
 
 
 class Item:
+    """
+    Create PyGame Object from image
+    Parameters:
+        item_path: (str) - Path to image file
+    Attributes:
+        load_image: returns a scaled Pygame Object from image
+    """
     def __init__(self, item_path: str=None):
         self.item_path = item_path
 
@@ -25,20 +32,47 @@ class Item:
 
 
 class Bin(Item):
+    """
+    Create PyGame Object from image of Bin
+    Parameters:
+        item_path: (str) - Path to image file
+        position: (tuple) - Location of bin on game window
+        bin_type: (str) - Purpose of bin
+    Attributes:
+        load_image: returns a scaled Pygame Object from image
+    """
     def __init__(self, item_path: str=None, position: tuple=None, bin_type: str=None):
         super().__init__(item_path)
         self.position = position
         self.bin_type = bin_type
 
+    def get_bintype(self):
+        bin_type = self.bin_type
+        return bin_type
+
+    def get_position(self):
+        return self.position
+
 
 class Waste(Item):
-    def __init__(self, item_path: str=None, waste_type: str=None, bin: str=None, bioharzard: bool=False, sharp: bool=False, toxic: bool=False):
+    """
+    Create PyGame Object from image of Waste
+    Parameters:
+        item_path: (str) - Path to image file
+        waste_type: (str) - Purpose of bin
+    Attributes:
+        load_image: returns a scaled Pygame Object from image
+    """
+    def __init__(self, item_path: str=None, waste_type: str=None, bin_type: str=None, biohazard: str=None, sharp: str=None, toxic: str=None):
         super().__init__(item_path)
         self.waste_type = waste_type
-        self.bin = bin
-        self.bioharzard = bioharzard
+        self.bin_type = bin_type
+        self.biohazard = biohazard
         self.sharp = sharp
         self.toxic = toxic
+
+    def get_bintype(self):
+        return self.bin_type
 
 # create an item class
 # create a bin class that inherits from am item class

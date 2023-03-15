@@ -11,3 +11,16 @@ Tissue (Wiping Bench),TissueRoll.png,Autoclave,TRUE,FALSE,FALSE
 Razor Blade,RazorBlade.png,Sharps,TRUE,TRUE,TRUE
 Falcon (buffer),Falcon.png,Yellow,FALSE,FALSE,FALSE
 Falcon (bacteria),Falcon.png,Autoclave,TRUE,FALSE,FALSE
+Broken Glass Pipette (after Decon),BrokenGlassPipette.png,Sharps,FALSE,TRUE,FALSE
+Bubble Wrap,BubbleWrap.png,General,FALSE,FALSE,FALSE
+Cardboard Box,CardboardBox.png,Recycling,FALSE,FALSE,FALSE
+Chemical Container,ChemicalContainer.png,Recycling,FALSE,FALSE,FALSE
+Cuvette (GM),Cuvette.png,Autoclave,TRUE,FALSE,FALSE
+DNAGel Print,DNAGelPrint.png,Recycling,FALSE,FALSE,FALSE
+Glass Beads (No GM),GlassBeads.png,Sharps,FALSE,TRUE,FALSE
+Pen ,Pen.png,Other,FALSE,FALSE,FALSE
+Petridish (GM),Petridish.png,Autoclave,TRUE,FALSE,FALSE
+Protein Gel,ProteinGel.png,Cytotoxic,FALSE,FALSE,TRUE
+Western Blot Film ,WesternBlotFilm.png,Other,FALSE,FALSE,FALSE
+Wine Bottle,WineBottle.png,Other,FALSE,FALSE,FALSE
+Cuvette (GM),Cuvette.png,Yellow,FALSE,FALSE,FALSE

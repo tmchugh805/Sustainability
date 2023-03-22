@@ -3,6 +3,7 @@ import pandas as pd
 import pygame
 from utils import draw, Bin, Waste, Item, Score
 
+scoreboard = Score(0, 700, 10)
 
 
 def main():
@@ -14,21 +15,22 @@ def main():
     binheight = 450
 
     # load images
-    LAB = Item("images/lab.jpg").load_image(800)
+    LAB = Item("images/labBlur.jpg").load_image(800)
     WASTE = Waste("images/" + df.Image[i], df.Waste[i], df.Bin[i], df.Biohazard[i], df.Sharp[i],
                   df.Toxic[i])
     WASTE_IMAGE = WASTE.load_image(50)
     BinArray = []
-    BinArray.append(Bin(item_path="images/Bin.png", position=(0, 300), bin_type="Autoclave"))
+    BinArray.append(Bin(item_path="images/Bin_Autoclave.png", position=(0, 300), bin_type="Autoclave"))
     BinArray.append(Bin(item_path="images/Toxic.png", position=(100, 300), bin_type="Yellow"))
-    BinArray.append(Bin(item_path="images/Bin.png", position=(200, 300), bin_type="Glass"))
-    BinArray.append(Bin(item_path="images/Bin.png", position=(300, 300), bin_type="Sharps"))
-    BinArray.append(Bin(item_path="images/Bin.png", position=(400, 300), bin_type="General"))
-    BinArray.append(Bin(item_path="images/Recycle.png", position=(500, 300), bin_type="Recycling"))
-    BinArray.append(Bin(item_path="images/Cytotoxic.png", position=(600, 300), bin_type="Cytotoxic"))
-    BinArray.append(Bin(item_path="images/Bin.png", position=(700, 300), bin_type="Other"))
+    BinArray.append(Bin(item_path="images/Bin_Glass.png", position=(200, 300), bin_type="Glass"))
+    BinArray.append(Bin(item_path="images/Bin_Sharps.png", position=(300, 300), bin_type="Sharps"))
+    BinArray.append(Bin(item_path="images/Bin_General.png", position=(400, 300), bin_type="General"))
+    BinArray.append(Bin(item_path="images/BinRecycling.png", position=(500, 300), bin_type="Recycling"))
+    BinArray.append(Bin(item_path="images/BinCytotoxic.png", position=(600, 300), bin_type="Cytotoxic"))
+    BinArray.append(Bin(item_path="images/Bin_Other.png", position=(700, 300), bin_type="Other"))
 
-    images = [(LAB, (0, 0)), (BinArray[0].load_image(75), (0, binheight)), (BinArray[1].load_image(75), (100, binheight)),
+    images = [(LAB, (0, 0)), (BinArray[0].load_image(75), (0, binheight)),
+              (BinArray[1].load_image(75), (100, binheight)),
               (BinArray[2].load_image(75), (200, binheight)),
               (BinArray[3].load_image(75), (300, binheight)), (BinArray[4].load_image(75), (400, binheight)),
               (BinArray[5].load_image(75), (500, binheight)),
@@ -46,7 +48,6 @@ def main():
     MAX_x_SPEED = 10
     y_change = 1
 
-
     while run:
         clock.tick(FPS)  # keep image at FPS 60 on all devices
         draw(WIN, images)  # draw all static images
@@ -56,33 +57,31 @@ def main():
         scoreboard.display(WIN)
         pygame.display.update()  # show your drawings on screen
 
-
-
-        if count == 10:  # if user presses clicks X
+        if count == 21:  # if user presses clicks X
             break
 
 
         for event in pygame.event.get():  # loop through all events
             if event.type == pygame.KEYDOWN:
-                if event.key == pygame.K_RIGHT: # if user presses right arrow key
+                if event.key == pygame.K_RIGHT:  # if user presses right arrow key
                     move_right = True
                     x_change = 2  # initial speed
-                if event.key == pygame.K_LEFT: # if user presses left arrow key
+                if event.key == pygame.K_LEFT:  # if user presses left arrow key
                     move_left = True
                     x_change = -2  # initial speed
-                if event.key == pygame.K_DOWN: # if user presses left arrow key
+                if event.key == pygame.K_DOWN:  # if user presses left arrow key
                     move_down = True
             elif event.type == pygame.KEYUP:
-                if event.key == pygame.K_RIGHT: # if user releases right arrow key
+                if event.key == pygame.K_RIGHT:  # if user releases right arrow key
                     move_right = False
                     x_change = 0  # stop waste
-                if event.key == pygame.K_LEFT: # if user releases left arrow key
+                if event.key == pygame.K_LEFT:  # if user releases left arrow key
                     move_left = False
                     x_change = 0  # stop waste
-                if event.key == pygame.K_DOWN: # if user presses left arrow key
+                if event.key == pygame.K_DOWN:  # if user presses left arrow key
                     move_down = False
                     y_change = 1  # reset step falling speed
-            elif event.type == pygame.QUIT: # if user presses clicks X
+            elif event.type == pygame.QUIT:  # if user presses clicks X
                 run = False
                 break
         if move_right:
@@ -103,26 +102,6 @@ def main():
 
         waste_x += x_change
         waste_y += y_change  # cause object to fall
-
-        # for event in pygame.event.get():  # loop through all events
-        #     if event.type == pygame.KEYDOWN:
-        #         if event.key == pygame.K_RIGHT: # if user presses right arrow key
-        #             move_right = True
-        #         if event.key == pygame.K_LEFT: # if user presses left arrow key
-        #             move_left = True
-        #     elif event.type == pygame.KEYUP:
-        #         if event.key == pygame.K_RIGHT: # if user releases right arrow key
-        #             move_right = False
-        #         if event.key == pygame.K_LEFT: # if user releases left arrow key
-        #             move_left = False
-        #     elif event.type == pygame.QUIT: # if user presses clicks X
-        #         run = False
-        #         break
-        # if move_right:
-        #     waste_x += 1  # move object to the right
-        # if move_left:
-        #     waste_x -= 1  # move object to the left
-        # waste_y += WASTE_SPEED # cause object to fall
 
         if waste_y > HEIGHT:  # if object moves off screen
             correct_bin = WASTE.get_bintype()
@@ -147,7 +126,7 @@ def which_bin(waste_x, binarray):
     return "Null"
 
 
-def main_menu(screen, clock, FPS, scoreboard):
+def main_menu(screen, clock, FPS):
     pygame.display.set_caption("Main Menu")
     run = True
     bright_green = (0, 255, 0)
@@ -193,10 +172,10 @@ def main_menu(screen, clock, FPS, scoreboard):
             else:
                 pygame.draw.rect(screen, red, (xposition, ypostionred, width, height))
 
-           # screen.blit(font_large.render("Waste Disposal Game", True, (255, 255, 255)), (325, 50))
-            screen.blit(font.render("Play", True, (0, 0, 0)), ((xposition+17), (ypostiongreen+30)))
-            screen.blit(font.render("Quit", True, (0, 0, 0)), ((xposition+17), (ypostionred+30)))
-            screen.blit(font_large.render("Final Score: " + str(Finalscore), True, (0, 0, 0)), (150, 150))
+            # screen.blit(font_large.render("Waste Disposal Game", True, (255, 255, 255)), (325, 50))
+            screen.blit(font.render("Play", True, (0, 0, 0)), ((xposition + 17), (ypostiongreen + 30)))
+            screen.blit(font.render("Quit", True, (0, 0, 0)), ((xposition + 17), (ypostionred + 30)))
+            screen.blit(font_large.render("Final Score: " + str(scoreboard.number)+ " / 20", True, (0, 0, 0)), (150, 150))
 
         pygame.display.flip()
         clock.tick(FPS)
@@ -212,7 +191,7 @@ pygame.init()
 
 LAB = pygame.image.load("images/lab.jpg")
 WIDTH, HEIGHT = LAB.get_width(), LAB.get_height()
-WIN = pygame.display.set_mode((800, 550), pygame.RESIZABLE)
+WIN = pygame.display.set_mode((800, 525), pygame.RESIZABLE)
 
 # set window name
 pygame.display.set_caption("Sustainability Game!!!")
@@ -227,6 +206,5 @@ FPS = 60
 
 # code for main game
 clock = pygame.time.Clock()
-scoreboard = Score(0, 700, 10)
 
-main_menu(WIN, clock, FPS, scoreboard)
+main_menu(WIN, clock, FPS)

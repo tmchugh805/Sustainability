@@ -2,6 +2,28 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="d171eec5-eab0-4489-8a8f-076d5b465e3f" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/images/BinCytotoxic.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/images/BinRecycling.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/images/Bin_Autoclave.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/images/Bin_General.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/images/Bin_Other.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/images/Bin_Sharps.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/images/BrokenGlassPipette.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/images/BubbleWrap.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/images/CardboardBox.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/images/ChemicalContainer.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/images/Cuvette.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/images/DNAGelPrint.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/images/GlassBeads.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/images/Pen.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/images/Petridish.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/images/ProteinGel.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/images/Protocol.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/images/WasteGamePicture.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/images/WesternBlotFilm.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/images/WineBottle.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/images/labBlur.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/images/labCartoon.jpg" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Waste_List.csv" beforeDir="false" afterPath="$PROJECT_DIR$/Waste_List.csv" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
@@ -74,6 +96,11 @@
     &quot;settings.editor.selected.configurable&quot;: &quot;com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable&quot;
   }
 }</component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\tonia\PycharmProjects\Sustainability\images" />
+    </key>
+  </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
@@ -146,7 +173,21 @@
       <option name="project" value="LOCAL" />
       <updated>1674668853850</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="Toni Current Version">
+      <created>1677851414439</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1677851414439</updated>
+    </task>
+    <task id="LOCAL-00011" summary="Add all Image Files to git">
+      <created>1677851553607</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1677851553607</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="UnknownFeatures">
@@ -215,20 +256,27 @@
     <MESSAGE value="Toni Merged with Chuanli" />
     <MESSAGE value="Toni Merged with Emmanuel" />
     <MESSAGE value="Added scoring and updated the Waste_List.csv" />
-    <option name="LAST_COMMIT_MESSAGE" value="Added scoring and updated the Waste_List.csv" />
+    <MESSAGE value="Toni Current Version" />
+    <MESSAGE value="Add all Image Files to git" />
+    <option name="LAST_COMMIT_MESSAGE" value="Add all Image Files to git" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/main.py</url>
-          <line>208</line>
+          <line>187</line>
           <option name="timeStamp" value="1" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/main.py</url>
-          <line>209</line>
+          <line>188</line>
           <option name="timeStamp" value="2" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/main.py</url>
+          <line>206</line>
+          <option name="timeStamp" value="3" />
         </line-breakpoint>
       </breakpoints>
       <default-breakpoints>

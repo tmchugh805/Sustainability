@@ -1,45 +1,53 @@
 import random
 import pandas as pd
 import pygame
+from pygame import VIDEORESIZE, QUIT, HWSURFACE, DOUBLEBUF, RESIZABLE
+
 from utils import draw, Bin, Waste, Item, Score
 
 scoreboard = Score(0, 650, 10)
+bonusscoreboard = Score(0, 650, 30)
 
 
 def main():
+
+    width = WIN.get_width()
+    height = WIN.get_height()
     run = True
     file_name = 'Waste_List.csv'
     df = pd.read_csv(file_name)
     i = random.choice(range(len(df)))
 
-    binheight = 450
+    binheight = 450*width/800
 
     # load images
-    LAB = Item("images/labBlur.jpg").load_image(800)
-    Bacteria = Item("images/Live Bacteria.png").load_image(60)
+    LAB = Item("images/labBlur.jpg").load_image(width)
+    # Bacteria = Item("images/Live Bacteria.png").load_image(60)
     WASTE = Waste("images/" + df.Image[i], df.Waste[i], df.Bin[i], df.Biohazard[i], df.Can_Decontaminate[i],
                   df.Decon_Bin[i])
-    WASTE_IMAGE = WASTE.load_image(60)
+    WASTE_IMAGE = WASTE.load_image(60*width/800)
     BinArray = []
-    BinArray.append(Bin(item_path="images/Bin_Autoclave.png", position=(0, 300), bin_type="Autoclave"))
-    BinArray.append(Bin(item_path="images/Bin Hazardous.png", position=(100, 300), bin_type="Yellow"))
-    BinArray.append(Bin(item_path="images/Bin_Glass.png", position=(200, 300), bin_type="Glass"))
-    BinArray.append(Bin(item_path="images/Bin_Sharps.png", position=(300, 300), bin_type="Sharps"))
-    BinArray.append(Bin(item_path="images/Bin_General.png", position=(400, 300), bin_type="General"))
-    BinArray.append(Bin(item_path="images/BinRecycling.png", position=(500, 300), bin_type="Recycling"))
-    BinArray.append(Bin(item_path="images/BinCytotoxic.png", position=(600, 300), bin_type="Cytotoxic"))
-    BinArray.append(Bin(item_path="images/Bin_Other.png", position=(700, 300), bin_type="Other"))
+    BinArray.append(Bin(item_path="images/Bin_Autoclave.png", position=(0, 300*width/800), bin_type="Autoclave"))
+    BinArray.append(Bin(item_path="images/Bin Hazardous.png", position=(100*width/800, 300*width/800), bin_type="Yellow"))
+    BinArray.append(Bin(item_path="images/Bin_Glass.png", position=(200*width/800, 300*width/800), bin_type="Glass"))
+    BinArray.append(Bin(item_path="images/Bin_Sharps.png", position=(300*width/800, 300*width/800), bin_type="Sharps"))
+    BinArray.append(Bin(item_path="images/Bin_General.png", position=(400*width/800, 300*width/800), bin_type="General"))
+    BinArray.append(Bin(item_path="images/BinRecycling.png", position=(500*width/800, 300*width/800), bin_type="Recycling"))
+    BinArray.append(Bin(item_path="images/BinCytotoxic.png", position=(600*width/800, 300*width/800), bin_type="Cytotoxic"))
+    BinArray.append(Bin(item_path="images/Bin_Other.png", position=(700*width/800, 300*width/800), bin_type="Other"))
 
-    images = [(LAB, (0, 0)), (BinArray[0].load_image(75), (0, binheight)),
-              (BinArray[1].load_image(75), (100, binheight)),
-              (BinArray[2].load_image(75), (200, binheight)),
-              (BinArray[3].load_image(75), (300, binheight)), (BinArray[4].load_image(75), (400, binheight)),
-              (BinArray[5].load_image(75), (500, binheight)),
-              (BinArray[6].load_image(75), (600, binheight)), (BinArray[7].load_image(75), (700, binheight))]
+    images = [(LAB, (0, 0)), (BinArray[0].load_image(75*width/800), (0, binheight)),
+              (BinArray[1].load_image(75*width/800), (100*width/800, binheight)),
+              (BinArray[2].load_image(75*width/800), (200*width/800, binheight)),
+              (BinArray[3].load_image(75*width/800), (300*width/800, binheight)), (BinArray[4].load_image(75*width/800), (400*width/800, binheight)),
+              (BinArray[5].load_image(75*width/800), (500*width/800, binheight)),
+              (BinArray[6].load_image(75*width/800), (600*width/800, binheight)), (BinArray[7].load_image(75*width/800), (700*width/800, binheight))]
+
     scoreboard.reset()
+    bonusscoreboard.reset()
 
     ## set initial image position
-    waste_x = random.randrange(0, WIDTH)
+    waste_x = random.randrange(0, width)
     waste_y = 0
     move_right = False
     move_left = False
@@ -48,19 +56,21 @@ def main():
     x_change = 0
     MAX_x_SPEED = 10
     y_change = 1
-    decon = False
+    decontaminate = False
+    Bacteria = Item("images/LiveBacteria.png").load_image(70*width/800)
 
     while run:
         clock.tick(FPS)  # keep image at FPS 60 on all devices
         draw(WIN, images)  # draw all static images
         WIN.blit(WASTE_IMAGE, (waste_x, waste_y))  # draw image of waste
         font = pygame.font.SysFont("calibri", 20, bold=True, italic=False)
-        WIN.blit(font.render(df.Waste[i], True, (0, 0, 0)), (100, 20))  # display waste name on screen
-        scoreboard.display(count, WIN)
+        WIN.blit(font.render(df.Waste[i], True, (0, 0, 0)), (100*width/800, 20*width/800))  # display waste name on screen
         if WASTE.biohazard:
-            WIN.blit(Bacteria, (20, 20))
+            WIN.blit(Bacteria, (20*width/800, 20*width/800))
+        scoreboard.display(count, WIN)
+        bonusscoreboard.bonusdisplay(WIN)
 
-        pygame.display.update() # show your drawings on screen
+        pygame.display.update()  # show your drawings on screen
 
         if count == 21:  # if user presses clicks X
             break
@@ -75,11 +85,6 @@ def main():
                     x_change = -2  # initial speed
                 if event.key == pygame.K_DOWN:  # if user presses left arrow key
                     move_down = True
-                if event.key == pygame.K_SPACE and WASTE.decon and not decon:
-                    WASTE.set_bintype(WASTE.decon_bin)
-                    Bacteria = Item("images/Dead Bacteria.png").load_image(60)
-                    decon = True
-                    scoreboard.add()
 
             elif event.type == pygame.KEYUP:
                 if event.key == pygame.K_RIGHT:  # if user releases right arrow key
@@ -91,9 +96,19 @@ def main():
                 if event.key == pygame.K_DOWN:  # if user presses left arrow key
                     move_down = False
                     y_change = 1  # reset step falling speed
+                if event.key == pygame.K_SPACE and not decontaminate and WASTE.decon:
+                    decontaminate = True
+                    Bacteria = Item("images/DeadBacteria.png").load_image(70)
+                    WASTE.set_bintype(WASTE.decon_bin)
+
+            elif event.type == VIDEORESIZE:
+                WIN.blit(pygame.transform.scale(LAB, event.dict['size']), (0, 0))
+                pygame.display.update()
+
             elif event.type == pygame.QUIT:  # if user presses clicks X
                 run = False
                 break
+
         if move_right:
             x_accel = 0.2  # right acceleration
             x_change += x_accel
@@ -113,27 +128,31 @@ def main():
         waste_x += x_change
         waste_y += y_change  # cause object to fall
 
-        if waste_y > HEIGHT:  # if object moves off screen
+        if waste_y > height:  # if object moves off screen
             correct_bin = WASTE.get_bintype()
             actual_bin = which_bin(waste_x, BinArray)
             if correct_bin == actual_bin:
                 scoreboard.add()
-            waste_x = random.randrange(0, WIDTH)  # new object falls from different x position on screen
+                if decontaminate:
+                    bonusscoreboard.add()
+
+            waste_x = random.randrange(0, width)  # new object falls from different x position on screen
             waste_y = -25  # bring new object at different position
             i = random.choice(range(len(df)))
             WASTE = Waste("images/" + df.Image[i], df.Waste[i], df.Bin[i], df.Biohazard[i], df.Can_Decontaminate[i],
                           df.Decon_Bin[i])
-            WASTE_IMAGE = WASTE.load_image(50)  # select random waste
+            WASTE_IMAGE = WASTE.load_image(50*width/800)  # select random waste
+            Bacteria = Item("images/LiveBacteria.png").load_image(70*width/800)
             count = count + 1
-            Bacteria = Item("images/Live Bacteria.png").load_image(60)
-            decon = False
+            decontaminate = False
 
 
 def which_bin(waste_x, binarray):
+    width = WIN.get_width()
     for bin in binarray:
         bin_position = bin.get_position()
         x_position = bin_position[0]
-        if x_position <= waste_x < (x_position + 100):
+        if x_position <= waste_x < (x_position + 100*width/800):
             return bin.get_bintype()
     return "Null"
 
@@ -148,25 +167,32 @@ def main_menu(screen, clock, FPS):
     screen.fill((0, 0, 0))
     font_large = pygame.font.SysFont("calibri", 24, bold=True, italic=False)
     font = pygame.font.SysFont("calibri", 18, bold=True, italic=False)
-    instrctfont = pygame.font.SysFont("calibri", 18, bold=False, italic=False)
-    Finalscore = scoreboard.number
+    instructfont = pygame.font.SysFont("calibri", 18, bold=False, italic=False)
 
     # pygame.mixer.music.load('background_music_wav.wav')
     # pygame.mixer.music.play(-1)
     while run:
 
+        WIDTH = WIN.get_width()
+        HEIGHT = WIN.get_height()
         mouse = pygame.mouse.get_pos()
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 quit()
                 run = False
 
-            width = 100
-            height = 50
+            elif event.type == VIDEORESIZE:
+                WIDTH, HEIGHT = event.size
+                HEIGHT = WIDTH * 525 / 800
+                screen = pygame.display.set_mode((WIDTH, HEIGHT), HWSURFACE | DOUBLEBUF | RESIZABLE)
+                pygame.display.update()
 
-            xposition = 600
-            ypostiongreen = 350
-            ypostionred = 400
+            width = WIDTH*100/800
+            height = HEIGHT*50/525
+
+            xposition = WIDTH*600/800
+            ypostiongreen = HEIGHT*350/525
+            ypostionred = HEIGHT*400/525
 
             if xposition + width > mouse[0] > xposition and ypostiongreen + height > mouse[1] > ypostiongreen:
                 pygame.draw.rect(screen, bright_green, (xposition, ypostiongreen, width, height))
@@ -176,7 +202,7 @@ def main_menu(screen, clock, FPS):
             else:
                 pygame.draw.rect(screen, green, (xposition, ypostiongreen, width, height))
 
-            if xposition + width > mouse[0] > xposition and ypostionred + 75 > mouse[1] > ypostionred:
+            if xposition + width > mouse[0] > xposition and ypostionred + 75*HEIGHT/525 > mouse[1] > ypostionred:
                 pygame.draw.rect(screen, bright_red, (xposition, ypostionred, width, height))
 
                 if event.type == pygame.MOUSEBUTTONDOWN:
@@ -186,12 +212,18 @@ def main_menu(screen, clock, FPS):
                 pygame.draw.rect(screen, red, (xposition, ypostionred, width, height))
 
             # screen.blit(font_large.render("Waste Disposal Game", True, (255, 255, 255)), (325, 50))
-            screen.blit(font.render("Play", True, (0, 0, 0)), ((xposition + 17), (ypostiongreen + 30)))
-            screen.blit(font.render("Quit", True, (0, 0, 0)), ((xposition + 17), (ypostionred + 30)))
-            screen.blit(font_large.render("Waste Disposal Game!", True, (200, 0, 200)),(280, 50))
-            screen.blit(instrctfont.render("Press arrow keys to move the waste in to the correct bin", True, (0, 150, 0)), (20, 120))
-            screen.blit(instrctfont.render("Press the space bar to decontaminate your waste where possible for extra points", True, (0, 150, 0)),(20, 160))
-            screen.blit(font_large.render("Final Score: " + str(scoreboard.number)+ " / 20", True, (0, 0, 0)), (300, 220))
+            screen.blit(font.render("Play", True, (0, 0, 0)), ((xposition + 17), (ypostiongreen + 30*HEIGHT/525)))
+            screen.blit(font.render("Quit", True, (0, 0, 0)), ((xposition + 17), (ypostionred + 30*HEIGHT/525)))
+            screen.blit(font_large.render("Waste Disposal Game!", True, (200, 0, 200)), (280*WIDTH/800, 50*HEIGHT/525))
+            screen.blit(
+                instructfont.render("Press arrow keys to move the waste in to the correct bin", True, (0, 150, 0)),
+                (20*WIDTH/800, 120*HEIGHT/525))
+            screen.blit(
+                instructfont.render("Press the space bar to decontaminate your waste where possible for extra points",
+                                   True, (0, 150, 0)), (20*WIDTH/800, 160*HEIGHT/525))
+            screen.blit(font_large.render("Final Score: " + str(scoreboard.number + bonusscoreboard.number) + " / 20", True, (0, 0, 0)),
+                        (300*WIDTH/800, 220*HEIGHT/525))
+            #screen.blit(font_large.render("Bonus Points: " + str(bonusscoreboard.number), True, (0, 0, 0)), (300, 250))
 
         pygame.display.flip()
         clock.tick(FPS)
@@ -205,9 +237,10 @@ global WIN
 pygame.mixer.pre_init(44100, 16, 2, 4096)
 pygame.init()
 
+WIN = pygame.display.set_mode((800, 525), pygame.RESIZABLE)
+
 LAB = pygame.image.load("images/lab.jpg")
 WIDTH, HEIGHT = LAB.get_width(), LAB.get_height()
-WIN = pygame.display.set_mode((800, 525), pygame.RESIZABLE)
 
 # set window name
 pygame.display.set_caption("Sustainability Game!!!")

@@ -111,7 +111,14 @@ class Score:
         RED = (255, 0, 0)
         label = myfont.render("Score: " + str(self.number) + "/" + str(count), 1, RED)
         screen.blit(label, (self.x_position, self.y_position))
-        pygame.display.update()
+     #   pygame.display.update()
+
+    def bonusdisplay(self, screen):
+        myfont = pygame.font.SysFont("calibri", 24, bold=True, italic=False)
+        RED = (255, 0, 0)
+        label = myfont.render("Bonus: " + str(self.number), 1, RED)
+        screen.blit(label, (self.x_position, self.y_position))
+     #   pygame.display.update()
 
     def reset(self):
         self.number = 0

@@ -4,7 +4,16 @@
     <list default="true" id="d171eec5-eab0-4489-8a8f-076d5b465e3f" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Waste_List.csv" beforeDir="false" afterPath="$PROJECT_DIR$/Waste_List.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/BrokenGlassPipette.png" beforeDir="false" afterPath="$PROJECT_DIR$/images/BrokenGlassPipette.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/images/BinCytotoxic.png" beforeDir="false" afterPath="$PROJECT_DIR$/images/BinCytotoxic.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/images/BinRecycling.png" beforeDir="false" afterPath="$PROJECT_DIR$/images/BinRecycling.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/images/Bin_General.png" beforeDir="false" afterPath="$PROJECT_DIR$/images/Bin_General.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/images/Bin_Sharps.png" beforeDir="false" afterPath="$PROJECT_DIR$/images/Bin_Sharps.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/images/BubbleWrap.png" beforeDir="false" afterPath="$PROJECT_DIR$/images/BubbleWrap.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/images/CardboardBox.png" beforeDir="false" afterPath="$PROJECT_DIR$/images/CardboardBox.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/images/ChemicalContainer.png" beforeDir="false" afterPath="$PROJECT_DIR$/images/ChemicalContainer.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/images/Dead bacteria.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/images/Eppendorf.png" beforeDir="false" afterPath="$PROJECT_DIR$/images/Eppendorf.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/images/ProteinGel.png" beforeDir="false" afterPath="$PROJECT_DIR$/images/ProteinGel.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/utils.py" beforeDir="false" afterPath="$PROJECT_DIR$/utils.py" afterDir="false" />
     </list>
@@ -174,7 +183,14 @@
       <option name="project" value="LOCAL" />
       <updated>1678902760709</updated>
     </task>
-    <option name="localTasksCounter" value="13" />
+    <task id="LOCAL-00013" summary="Added decontaminate functionality and added instructions">
+      <created>1689079560428</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1689079560428</updated>
+    </task>
+    <option name="localTasksCounter" value="14" />
     <servers />
   </component>
   <component name="UnknownFeatures">
@@ -246,49 +262,35 @@
     <MESSAGE value="Toni Current Version" />
     <MESSAGE value="Add all Image Files to git" />
     <MESSAGE value="Add more Image Files to git and fixed score" />
-    <option name="LAST_COMMIT_MESSAGE" value="Add more Image Files to git and fixed score" />
+    <MESSAGE value="Added decontaminate functionality and added instructions" />
+    <option name="LAST_COMMIT_MESSAGE" value="Added decontaminate functionality and added instructions" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/main.py</url>
-          <line>204</line>
+          <line>236</line>
           <option name="timeStamp" value="1" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/main.py</url>
-          <line>205</line>
+          <line>237</line>
           <option name="timeStamp" value="2" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/main.py</url>
-          <line>223</line>
+          <line>256</line>
           <option name="timeStamp" value="3" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/main.py</url>
-          <line>59</line>
-          <option name="timeStamp" value="4" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/main.py</url>
-          <line>58</line>
-          <option name="timeStamp" value="5" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/main.py</url>
-          <line>62</line>
+          <line>72</line>
           <option name="timeStamp" value="6" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/main.py</url>
-          <line>78</line>
-          <option name="timeStamp" value="7" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/main.py</url>
-          <line>83</line>
+          <line>88</line>
           <option name="timeStamp" value="8" />
         </line-breakpoint>
       </breakpoints>

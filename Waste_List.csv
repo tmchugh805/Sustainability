@@ -14,8 +14,8 @@ Razor Blade ,RazorBlade.png,None,TRUE,TRUE,Sharps
 Razor Blade,RazorBlade.png,Sharps,FALSE,FALSE,Sharps
 Falcon (buffer),Falcon.png,Yellow,FALSE,FALSE,Yellow
 Falcon (bacteria),Falcon.png,Autoclave,TRUE,TRUE,Yellow
-Broken Glass Pipette,BrokenGlassPipette.png,Sharps,FALSE,FALSE,Sharps
-Broken Glass Pipette ,BrokenGlassPipette.png,None,TRUE,TRUE,Sharps
+Broken Glass Pipette,BrokenGlassPipette.png,Glass,FALSE,FALSE,Glass
+Broken Glass Pipette ,BrokenGlassPipette.png,None,TRUE,TRUE,Glass
 Bubble Wrap,BubbleWrap.png,General,FALSE,FALSE,General
 Cardboard Box,CardboardBox.png,Recycling,FALSE,FALSE,Recycling
 Chemical Container,ChemicalContainer.png,Recycling,FALSE,FALSE,Recycling

@@ -1,26 +1,31 @@
-﻿Waste,Image,Bin,Biohazard,Sharp,Toxic
-Broken Flask,Broken Flask.png,Glass,FALSE,FALSE,FALSE
-Chemical Powder,Chemical Powder.png,Yellow,FALSE,FALSE,TRUE
-Eppendorf (No GM),Eppendorf.png,Yellow,FALSE,FALSE,FALSE
-Eppendorf (With GM),Eppendorf.png,Autoclave,TRUE,FALSE,FALSE
-Gloves (No GM),gloves.png,Yellow,FALSE,FALSE,FALSE
-Gloves (With GMO),gloves.png,Autoclave,TRUE,FALSE,FALSE
-Recombinant Protein,Recombinant protein.png,Autoclave,TRUE,FALSE,FALSE
-Syringe Tip,Syringe Tip.png,Sharps,TRUE,TRUE,FALSE
-Tissue (Wiping Bench),TissueRoll.png,Autoclave,TRUE,FALSE,FALSE
-Razor Blade,RazorBlade.png,Sharps,TRUE,TRUE,TRUE
-Falcon (buffer),Falcon.png,Yellow,FALSE,FALSE,FALSE
-Falcon (bacteria),Falcon.png,Autoclave,TRUE,FALSE,FALSE
-Broken Glass Pipette (after Decon),BrokenGlassPipette.png,Sharps,FALSE,TRUE,FALSE
-Bubble Wrap,BubbleWrap.png,General,FALSE,FALSE,FALSE
-Cardboard Box,CardboardBox.png,Recycling,FALSE,FALSE,FALSE
-Chemical Container,ChemicalContainer.png,Recycling,FALSE,FALSE,FALSE
-Cuvette (GM),Cuvette.png,Autoclave,TRUE,FALSE,FALSE
-DNAGel Print,DNAGelPrint.png,Recycling,FALSE,FALSE,FALSE
-Glass Beads (No GM),GlassBeads.png,Sharps,FALSE,TRUE,FALSE
-Pen ,Pen.png,Other,FALSE,FALSE,FALSE
-Petridish (GM),Petridish.png,Autoclave,TRUE,FALSE,FALSE
-Protein Gel,ProteinGel.png,Cytotoxic,FALSE,FALSE,TRUE
-Western Blot Film ,WesternBlotFilm.png,Other,FALSE,FALSE,FALSE
-Wine Bottle,WineBottle.png,Other,FALSE,FALSE,FALSE
-Cuvette (GM),Cuvette.png,Yellow,FALSE,FALSE,FALSE
+﻿Waste,Image,Bin,Biohazard,Can_Decontaminate,Decon_Bin
+Broken Flask,Broken Flask.png,Glass,FALSE,FALSE,Glass
+Broken Flask ,Broken Flask.png,None,TRUE,TRUE,Glass
+Chemical Powder,Chemical Powder.png,Yellow,FALSE,FALSE,Yellow
+Eppendorf ,Eppendorf.png,Yellow,FALSE,FALSE,Yellow
+Eppendorf,Eppendorf.png,Autoclave,TRUE,TRUE,Yellow
+Gloves,gloves.png,Yellow,FALSE,FALSE,Yellow
+Gloves ,gloves.png,Autoclave,TRUE,FALSE,Autoclave
+Recombinant Protein,Recombinant protein.png,Autoclave,TRUE,FALSE,Autoclave
+Syringe Tip,Syringe Tip.png,None,TRUE,TRUE,Sharps
+Syringe Tip,Syringe Tip.png,Sharps,FALSE,FALSE,Sharps
+Tissue (Wiping Bench),TissueRoll.png,Autoclave,TRUE,FALSE,Autoclave
+Razor Blade ,RazorBlade.png,None,TRUE,TRUE,Sharps
+Razor Blade,RazorBlade.png,Sharps,FALSE,FALSE,Sharps
+Falcon (buffer),Falcon.png,Yellow,FALSE,FALSE,Yellow
+Falcon (bacteria),Falcon.png,Autoclave,TRUE,TRUE,Yellow
+Broken Glass Pipette,BrokenGlassPipette.png,Sharps,FALSE,FALSE,Sharps
+Broken Glass Pipette ,BrokenGlassPipette.png,None,TRUE,TRUE,Sharps
+Bubble Wrap,BubbleWrap.png,General,FALSE,FALSE,General
+Cardboard Box,CardboardBox.png,Recycling,FALSE,FALSE,Recycling
+Chemical Container,ChemicalContainer.png,Recycling,FALSE,FALSE,Recycling
+Cuvette,Cuvette.png,Autoclave,TRUE,TRUE,Yellow
+DNAGel Print,DNAGelPrint.png,Recycling,FALSE,FALSE,Recycling
+Glass Beads,GlassBeads.png,Sharps,FALSE,TRUE,Sharps
+Glass Beads ,GlassBeads.png,None,TRUE,TRUE,Sharps
+Pen ,Pen.png,Other,FALSE,FALSE,Other
+Petridish ,Petridish.png,Autoclave,TRUE,FALSE,Autoclave
+Protein Gel,ProteinGel.png,Yellow,FALSE,FALSE,Yellow
+Western Blot Film ,WesternBlotFilm.png,Other,FALSE,FALSE,Other
+Wine Bottle,WineBottle.png,Other,FALSE,FALSE,Other
+Cuvette,Cuvette.png,Yellow,FALSE,FALSE,Yellow

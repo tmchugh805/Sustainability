@@ -3,7 +3,7 @@ import pandas as pd
 import pygame
 from utils import draw, Bin, Waste, Item, Score
 
-scoreboard = Score(0, 700, 10)
+scoreboard = Score(0, 650, 10)
 
 
 def main():
@@ -16,12 +16,13 @@ def main():
 
     # load images
     LAB = Item("images/labBlur.jpg").load_image(800)
-    WASTE = Waste("images/" + df.Image[i], df.Waste[i], df.Bin[i], df.Biohazard[i], df.Sharp[i],
-                  df.Toxic[i])
-    WASTE_IMAGE = WASTE.load_image(50)
+    Bacteria = Item("images/Live Bacteria.png").load_image(60)
+    WASTE = Waste("images/" + df.Image[i], df.Waste[i], df.Bin[i], df.Biohazard[i], df.Can_Decontaminate[i],
+                  df.Decon_Bin[i])
+    WASTE_IMAGE = WASTE.load_image(60)
     BinArray = []
     BinArray.append(Bin(item_path="images/Bin_Autoclave.png", position=(0, 300), bin_type="Autoclave"))
-    BinArray.append(Bin(item_path="images/Toxic.png", position=(100, 300), bin_type="Yellow"))
+    BinArray.append(Bin(item_path="images/Bin Hazardous.png", position=(100, 300), bin_type="Yellow"))
     BinArray.append(Bin(item_path="images/Bin_Glass.png", position=(200, 300), bin_type="Glass"))
     BinArray.append(Bin(item_path="images/Bin_Sharps.png", position=(300, 300), bin_type="Sharps"))
     BinArray.append(Bin(item_path="images/Bin_General.png", position=(400, 300), bin_type="General"))
@@ -47,15 +48,19 @@ def main():
     x_change = 0
     MAX_x_SPEED = 10
     y_change = 1
+    decon = False
 
     while run:
         clock.tick(FPS)  # keep image at FPS 60 on all devices
         draw(WIN, images)  # draw all static images
         WIN.blit(WASTE_IMAGE, (waste_x, waste_y))  # draw image of waste
         font = pygame.font.SysFont("calibri", 20, bold=True, italic=False)
-        WIN.blit(font.render(df.Waste[i], True, (0, 0, 0)), (50, 10))  # display waste name on screen
-        scoreboard.display(WIN)
-        pygame.display.update()  # show your drawings on screen
+        WIN.blit(font.render(df.Waste[i], True, (0, 0, 0)), (100, 20))  # display waste name on screen
+        scoreboard.display(count, WIN)
+        if WASTE.biohazard:
+            WIN.blit(Bacteria, (20, 20))
+
+        pygame.display.update() # show your drawings on screen
 
         if count == 21:  # if user presses clicks X
             break
@@ -70,6 +75,12 @@ def main():
                     x_change = -2  # initial speed
                 if event.key == pygame.K_DOWN:  # if user presses left arrow key
                     move_down = True
+                if event.key == pygame.K_SPACE and WASTE.decon and not decon:
+                    WASTE.set_bintype(WASTE.decon_bin)
+                    Bacteria = Item("images/Dead Bacteria.png").load_image(60)
+                    decon = True
+                    scoreboard.add()
+
             elif event.type == pygame.KEYUP:
                 if event.key == pygame.K_RIGHT:  # if user releases right arrow key
                     move_right = False
@@ -110,10 +121,12 @@ def main():
             waste_x = random.randrange(0, WIDTH)  # new object falls from different x position on screen
             waste_y = -25  # bring new object at different position
             i = random.choice(range(len(df)))
-            WASTE = Waste("images/" + df.Image[i], df.Waste[i], df.Bin[i], df.Biohazard[i], df.Sharp[i],
-                          df.Toxic[i])
+            WASTE = Waste("images/" + df.Image[i], df.Waste[i], df.Bin[i], df.Biohazard[i], df.Can_Decontaminate[i],
+                          df.Decon_Bin[i])
             WASTE_IMAGE = WASTE.load_image(50)  # select random waste
             count = count + 1
+            Bacteria = Item("images/Live Bacteria.png").load_image(60)
+            decon = False
 
 
 def which_bin(waste_x, binarray):
@@ -134,7 +147,8 @@ def main_menu(screen, clock, FPS):
     green = (0, 200, 0)
     screen.fill((0, 0, 0))
     font_large = pygame.font.SysFont("calibri", 24, bold=True, italic=False)
-    font = pygame.font.SysFont("calibri", 14, bold=True, italic=False)
+    font = pygame.font.SysFont("calibri", 18, bold=True, italic=False)
+    instrctfont = pygame.font.SysFont("calibri", 18, bold=False, italic=False)
     Finalscore = scoreboard.number
 
     # pygame.mixer.music.load('background_music_wav.wav')
@@ -174,7 +188,10 @@ def main_menu(screen, clock, FPS):
             # screen.blit(font_large.render("Waste Disposal Game", True, (255, 255, 255)), (325, 50))
             screen.blit(font.render("Play", True, (0, 0, 0)), ((xposition + 17), (ypostiongreen + 30)))
             screen.blit(font.render("Quit", True, (0, 0, 0)), ((xposition + 17), (ypostionred + 30)))
-            screen.blit(font_large.render("Final Score: " + str(scoreboard.number)+ " / 20", True, (0, 0, 0)), (150, 150))
+            screen.blit(font_large.render("Waste Disposal Game!", True, (200, 0, 200)),(280, 50))
+            screen.blit(instrctfont.render("Press arrow keys to move the waste in to the correct bin", True, (0, 150, 0)), (20, 120))
+            screen.blit(instrctfont.render("Press the space bar to decontaminate your waste where possible for extra points", True, (0, 150, 0)),(20, 160))
+            screen.blit(font_large.render("Final Score: " + str(scoreboard.number)+ " / 20", True, (0, 0, 0)), (300, 220))
 
         pygame.display.flip()
         clock.tick(FPS)

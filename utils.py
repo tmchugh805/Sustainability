@@ -31,6 +31,7 @@ class Item:
             return pygame.image.load(self.item_path)
 
 
+
 class Bin(Item):
     """
     Create PyGame Object from image of Bin
@@ -63,16 +64,21 @@ class Waste(Item):
     Attributes:
         load_image: returns a scaled Pygame Object from image
     """
-    def __init__(self, item_path: str=None, waste_type: str=None, bin_type: str=None, biohazard: str=None, sharp: str=None, toxic: str=None):
+    def __init__(self, item_path: str=None, waste_type: str=None, bin_type: str=None, biohazard: str=None, decon: str=None, decon_bin: str=None):
         super().__init__(item_path)
         self.waste_type = waste_type
         self.bin_type = bin_type
         self.biohazard = biohazard
-        self.sharp = sharp
-        self.toxic = toxic
+        self.decon = decon
+        self.decon_bin = decon_bin
 
     def get_bintype(self):
         return self.bin_type
+
+    def set_bintype(self, new_bin):
+        self.bin_type = new_bin
+
+
 
 # create an item class
 # create a bin class that inherits from am item class
@@ -100,10 +106,10 @@ class Score:
         self.x_position = x
         self.y_position = y
 
-    def display(self, screen):
+    def display(self, count, screen):
         myfont = pygame.font.SysFont("calibri", 24, bold=True, italic=False)
         RED = (255, 0, 0)
-        label = myfont.render("Score: " + str(self.number), 1, RED)
+        label = myfont.render("Score: " + str(self.number) + "/" + str(count), 1, RED)
         screen.blit(label, (self.x_position, self.y_position))
         pygame.display.update()
 

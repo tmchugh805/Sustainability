@@ -89,6 +89,7 @@ def main():
         if count == 21:  # if user presses clicks X
             break
 
+
         for event in pygame.event.get():  # loop through all events
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_RIGHT:  # if user presses right arrow key

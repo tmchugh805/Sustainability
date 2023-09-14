@@ -271,19 +271,19 @@ def main_menu(screen, clock, FPS):
 
             screen.blit(
                 creditfont.render("Designed and conceived by WCB Sustainability group",
-                                    True, (0, 0, 0)), (50 * WIDTH / 800, 480 * HEIGHT / 525))
+                                    True, (0, 0, 0)), (50 * WIDTH / 800, 470 * HEIGHT / 525))
             screen.blit(
                 creditfont.render("Developed By: T.McHugh, E.Fiagbedzi, C.Huang",
-                                    True, (0, 0, 0)), (50 * WIDTH / 800, 490 * HEIGHT / 525))
+                                    True, (0, 0, 0)), (50 * WIDTH / 800, 480 * HEIGHT / 525))
             screen.blit(
                 creditfont.render("Thanks to: A.Gluszek, M.Green, L.Koch, T.McHugh",
-                                    True, (0, 0, 0)), (50 * WIDTH / 800, 500 * HEIGHT / 525))
+                                    True, (0, 0, 0)), (50 * WIDTH / 800, 490 * HEIGHT / 525))
             screen.blit(
                 creditfont.render("D.Modaffari, L.Remnant, A.Stirpe, J.Weber",
-                                    True, (0, 0, 0)), (50 * WIDTH / 800, 510 * HEIGHT / 525))
+                                    True, (0, 0, 0)), (50 * WIDTH / 800, 500 * HEIGHT / 525))
             screen.blit(
                 creditfont.render("M.Lim, W.Rolls, A.Hong-Minh, E.Pönniäinen, H.Johns",
-                                    True, (0, 0, 0)), (50 * WIDTH / 800, 520 * HEIGHT / 525))
+                                    True, (0, 0, 0)), (50 * WIDTH / 800, 510 * HEIGHT / 525))
 
         pygame.display.flip()
         clock.tick(FPS)
